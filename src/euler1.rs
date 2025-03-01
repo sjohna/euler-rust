@@ -1,4 +1,4 @@
-
+#[allow(dead_code)]
 pub fn euler1_loop() -> i32 {
     let mut sum = 0;
 
@@ -9,4 +9,14 @@ pub fn euler1_loop() -> i32 {
     }
 
     sum
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_euler1_loop() {
+        assert_eq!(euler1_loop(), 233168);
+    }
 }

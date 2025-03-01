@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 pub fn euler2_loop() -> i32 {
     let mut prev = 0;
     let mut curr = 1;
@@ -14,4 +15,12 @@ pub fn euler2_loop() -> i32 {
     }
 
     sum
+}
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn test_euler2_loop() {
+        assert_eq!(super::euler2_loop(), 4_613_732);
+    }
 }
