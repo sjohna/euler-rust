@@ -8,5 +8,5 @@ pub fn euler1_loop() -> i32 {
         }
     }
 
-    return sum;
+    sum
 }
