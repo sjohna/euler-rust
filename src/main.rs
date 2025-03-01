@@ -1,3 +1,5 @@
+mod euler1;
+
 fn main() {
-    println!("Hello, world!");
+    println!("{}", euler1::euler1_loop());
 }

@@ -1,5 +1,5 @@
 
-fn main() {
+pub fn euler1_loop() -> i32 {
     let mut sum = 0;
 
     for n in 1..1000 {
@@ -8,5 +8,5 @@ fn main() {
         }
     }
 
-    println!("{}", sum);
+    return sum;
 }
