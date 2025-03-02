@@ -13,10 +13,8 @@ pub fn euler1_loop() -> i32 {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     #[test]
-    fn test_euler1_loop() {
-        assert_eq!(euler1_loop(), 233168);
+    fn euler1_loop() {
+        assert_eq!(super::euler1_loop(), 233168);
     }
 }

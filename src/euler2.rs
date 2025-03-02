@@ -18,9 +18,9 @@ pub fn euler2_loop() -> i32 {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     #[test]
-    fn test_euler2_loop() {
+    fn euler2_loop() {
         assert_eq!(super::euler2_loop(), 4_613_732);
     }
 }
