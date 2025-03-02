@@ -11,10 +11,20 @@ pub fn euler1_loop() -> i32 {
     sum
 }
 
+#[allow(dead_code)]
+pub fn euler1_iterator() -> i32 {
+    (1..1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
     fn euler1_loop() {
         assert_eq!(super::euler1_loop(), 233168);
+    }
+
+    #[test]
+    fn euler1_iterator() {
+        assert_eq!(super::euler1_iterator(), 233168);
     }
 }
