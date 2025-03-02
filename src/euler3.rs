@@ -1,3 +1,5 @@
+use std::iter::once;
+
 pub fn euler3_all_together() -> i64 {
     // calculate primes and then divide them out of the number all at once
 
@@ -20,7 +22,7 @@ pub fn euler3_all_together() -> i64 {
             let max = i64::isqrt(next_candidate);
 
             let mut factor_found = false;
-            for factor in 2..max {
+            for factor in once(2).chain((3..max).step_by(2)) {  // check 2 but skip other evens
                 if next_candidate % factor == 0 {
                     factor_found = true;
                     break;
