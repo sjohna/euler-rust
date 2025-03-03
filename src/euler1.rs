@@ -1,4 +1,3 @@
-#[allow(dead_code)]
 pub fn euler1_loop() -> i32 {
     let mut sum = 0;
 
@@ -11,12 +10,10 @@ pub fn euler1_loop() -> i32 {
     sum
 }
 
-#[allow(dead_code)]
 pub fn euler1_iterator() -> i32 {
     (1..1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
 }
 
-#[allow(dead_code)]
 pub fn euler1_custom_iterator_function() -> i32 {
     std::iter::from_fn(natural_numbers()).take_while(|n| n < &1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()  // what is the & I need before the literal 1000 in the take_while?
 }

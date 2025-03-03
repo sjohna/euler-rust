@@ -1,6 +1,5 @@
 use std::iter::once;
 
-#[allow(dead_code)]
 pub fn euler3_all_together() -> i64 {
     // calculate primes and then divide them out of the number all at once
 

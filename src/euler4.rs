@@ -1,6 +1,5 @@
 use priority_queue::PriorityQueue;
 
-#[allow(dead_code)]
 pub fn euler4_loops() -> i32 {
     let mut max_palindrome = 0;
     for a in 100..1000 {

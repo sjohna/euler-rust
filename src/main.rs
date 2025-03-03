@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod euler1;
 mod euler2;
 mod euler3;

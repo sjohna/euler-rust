@@ -1,6 +1,5 @@
 use crate::util;
 
-#[allow(dead_code)]
 pub fn euler2_loop() -> i32 {
     let mut prev = 0;
     let mut curr = 1;

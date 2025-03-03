@@ -1,5 +1,4 @@
 
-#[allow(dead_code)]
 pub fn gcd(mut a: i64, mut b: i64) -> i64 {
     if b < a {
         (b,a) = (a,b);
@@ -12,7 +11,6 @@ pub fn gcd(mut a: i64, mut b: i64) -> i64 {
     b
 }
 
-#[allow(dead_code)]
 pub fn lcm(a: i64, b: i64) -> i64 {
     (a * b) / gcd(a, b)
 }
@@ -24,6 +22,8 @@ pub fn fibonacci_sequence() -> impl FnMut() -> Option<i64> {    // need the impl
         Some(curr)
     }
 }
+
+
 
 #[cfg(test)]
 mod tests {
