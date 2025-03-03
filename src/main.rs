@@ -9,7 +9,9 @@ mod util;
 mod euler6;
 mod euler4;
 mod euler7;
+mod euler14;
 
 fn main() {
-    println!("{}", euler7::euler7_iterator());
+    println!("{}", euler14::euler14_iter());
+
 }
