@@ -8,16 +8,16 @@ pub fn euler14_iter() -> i64 {
     (1..=1_000_000).map(|n| (n, sequence_length(&mut sequence_lengths, n))).reduce(|x,y| if x.1 > y.1 { x } else { y } ).unwrap().0
 }
 
-fn sequence_length(map: &mut HashMap::<i64, i64>, key: i64) -> i64 {
-    if map.contains_key(&key) {
-        return map[&key];
+fn sequence_length(cache: &mut HashMap::<i64, i64>, n: i64) -> i64 {
+    if cache.contains_key(&n) {
+        return cache[&n];
     }
 
-    let length = 1 + sequence_length(map, next_value(key));
+    let length = 1 + sequence_length(cache, next_value(n));
 
-    map.insert(key, length);
+    cache.insert(n, length);
 
-    map[&key]
+    cache[&n]
 }
 
 fn next_value(n: i64) -> i64 {
