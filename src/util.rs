@@ -17,6 +17,14 @@ pub fn lcm(a: i64, b: i64) -> i64 {
     (a * b) / gcd(a, b)
 }
 
+pub fn fibonacci_sequence() -> impl FnMut() -> Option<i64> {    // need the impl keyword here, or I get errors. What does that do? What are the other options here?
+    let (mut curr, mut next): (i64, i64) = (0,1);
+    move || -> Option<i64> {
+        (curr, next) = (next, curr + next);
+        Some(curr)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     #[test]

@@ -22,7 +22,7 @@ pub fn euler1_custom_iterator_function() -> i32 {
 }
 
 fn natural_numbers() -> impl FnMut() -> Option<i32> {   // this needs to be FnMut instead of Fn. What's the difference?
-    let mut num = 1;
+    let mut num = 0;
     move || -> Option<i32> {    // I need `move` here or I get heinous compiler errors. What's this doing?
         num += 1;
         Some(num)
