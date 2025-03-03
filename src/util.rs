@@ -23,7 +23,34 @@ pub fn fibonacci_sequence() -> impl FnMut() -> Option<i64> {    // need the impl
     }
 }
 
+pub fn primes() -> impl FnMut() -> Option<i64> {
+    let mut next_candidate: i64 = 2;
+    move || -> Option<i64> {
+        if next_candidate == 2 {
+            next_candidate = 3;
+            return Some(2)
+        }
 
+        loop {
+            let max = i64::isqrt(next_candidate);
+            let mut factor_found = false;
+            for factor in std::iter::once(2).chain((3..=max).step_by(2)) {
+                if next_candidate % factor == 0 {
+                    factor_found = true;
+                    break;
+                }
+            }
+
+            if !factor_found {
+                let next_prime = next_candidate;
+                next_candidate += 2;
+                return Some(next_prime);
+            }
+
+            next_candidate += 2;
+        }
+    }
+}
 
 #[cfg(test)]
 mod tests {
