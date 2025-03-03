@@ -11,5 +11,5 @@ mod euler4;
 mod euler7;
 
 fn main() {
-    println!("{}", euler4::euler4_priority_queue());
+    println!("{}", euler7::euler7_iterator());
 }
