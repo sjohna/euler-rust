@@ -4,7 +4,8 @@ mod euler3;
 mod euler5;
 
 mod util;
+mod euler6;
 
 fn main() {
-    println!("{}", euler5::euler5_iter());
+    println!("{}", euler6::euler6_iters());
 }
