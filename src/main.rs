@@ -10,8 +10,9 @@ mod euler6;
 mod euler4;
 mod euler7;
 mod euler14;
+mod euler56;
 
 fn main() {
-    println!("{}", euler14::euler14_iter());
+    println!("{}", euler56::euler56_loops());
 
 }
