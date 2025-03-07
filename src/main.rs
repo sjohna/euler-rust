@@ -12,8 +12,9 @@ mod euler7;
 mod euler14;
 mod euler56;
 mod euler87;
+mod euler85;
 
 fn main() {
-    println!("{}", euler87::euler87_priority_queue());
+    println!("{}", euler85::euler85_priority_queue());
 
 }

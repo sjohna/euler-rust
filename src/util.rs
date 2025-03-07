@@ -52,6 +52,10 @@ pub fn primes() -> impl FnMut() -> Option<i64> {
     }
 }
 
+pub fn triangular_number(n: i64) -> i64 {
+    (n * (n + 1)) / 2
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
