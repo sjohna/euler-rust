@@ -56,6 +56,10 @@ pub fn triangular_number(n: i64) -> i64 {
     (n * (n + 1)) / 2
 }
 
+pub fn pentagonal_number(n: i64) -> i64 {
+    (n * (3*n - 1)) / 2
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
@@ -83,5 +87,35 @@ mod tests {
         assert_eq!(super::lcm(5,7), 35);
         assert_eq!(super::lcm(8,12), 24);
         assert_eq!(super::lcm(2*2*3*5*11,2*2*3*3*5*7*11*13), 2*2*3*3*5*7*11*13);
+    }
+
+    #[test]
+    fn triangular_number() {
+        assert_eq!(super::triangular_number(1), 1);
+        assert_eq!(super::triangular_number(2), 3);
+        assert_eq!(super::triangular_number(3), 6);
+        assert_eq!(super::triangular_number(4), 10);
+        assert_eq!(super::triangular_number(5), 15);
+        assert_eq!(super::triangular_number(6), 21);
+        assert_eq!(super::triangular_number(7), 28);
+        assert_eq!(super::triangular_number(8), 36);
+        assert_eq!(super::triangular_number(9), 45);
+        assert_eq!(super::triangular_number(10), 55);
+        assert_eq!(super::triangular_number(100), 5050);
+        assert_eq!(super::triangular_number(1000), 500500);
+    }
+
+    #[test]
+    fn pentagonal_number() {
+        assert_eq!(super::pentagonal_number(1), 1);
+        assert_eq!(super::pentagonal_number(2), 5);
+        assert_eq!(super::pentagonal_number(3), 12);
+        assert_eq!(super::pentagonal_number(4), 22);
+        assert_eq!(super::pentagonal_number(5), 35);
+        assert_eq!(super::pentagonal_number(6), 51);
+        assert_eq!(super::pentagonal_number(7), 70);
+        assert_eq!(super::pentagonal_number(8), 92);
+        assert_eq!(super::pentagonal_number(9), 117);
+        assert_eq!(super::pentagonal_number(10), 145);
     }
 }
