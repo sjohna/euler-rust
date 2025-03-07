@@ -14,8 +14,8 @@ mod euler56;
 mod euler87;
 mod euler85;
 mod euler44;
+mod euler53;
 
 fn main() {
-    println!("{}", euler44::euler44_priority_queue());
-
+    println!("{}", euler53::euler53_nobigint());
 }

@@ -1,3 +1,4 @@
+use num_bigint::BigInt;
 
 pub fn gcd(mut a: i64, mut b: i64) -> i64 {
     if b < a {
@@ -58,6 +59,19 @@ pub fn triangular_number(n: i64) -> i64 {
 
 pub fn pentagonal_number(n: i64) -> i64 {
     (n * (3*n - 1)) / 2
+}
+
+pub fn choose(n: i32, r: i32) -> BigInt {
+    factorial(n) / (factorial(r) * factorial(n-r))
+}
+
+pub fn factorial(n: i32) -> BigInt {
+    let mut fac = BigInt::from(1);
+    for i in 1..=n {
+        fac = fac * BigInt::from(i);
+    }
+
+    fac
 }
 
 #[cfg(test)]
