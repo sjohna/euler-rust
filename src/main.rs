@@ -15,7 +15,8 @@ mod euler87;
 mod euler85;
 mod euler44;
 mod euler53;
+mod euler80;
 
 fn main() {
-    println!("{}", euler53::euler53_nobigint());
+    println!("{}", euler80::euler80_iter());
 }
