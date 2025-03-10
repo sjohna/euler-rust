@@ -20,7 +20,8 @@ mod euler38;
 mod euler52;
 mod euler43;
 mod euler42;
+mod euler54;
 
 fn main() {
-    println!("{}", euler42::euler42());
+    println!("{}", euler54::euler54());
 }
