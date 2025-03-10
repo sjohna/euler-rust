@@ -17,7 +17,9 @@ mod euler44;
 mod euler53;
 mod euler80;
 mod euler38;
+mod euler52;
+mod euler43;
 
 fn main() {
-    println!("{}", euler38::euler38_naive_loop());
+    println!("{}", euler43::euler43_naive_loops());
 }
