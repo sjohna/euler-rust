@@ -26,7 +26,7 @@ pub fn euler87_priority_queue() -> i32 {
 
     while !pq.is_empty() {
         let (ps, product) = pq.pop().unwrap();
-        if product < Reverse(50_000_000) {
+        if product.0 > 50_000_000 {
             break
         }
 
@@ -36,20 +36,9 @@ pub fn euler87_priority_queue() -> i32 {
         }
 
 
-        if !next_prime_map.contains_key(&ps.square) { // why do I need a & here?
-            next_prime_map.insert(ps.square, prime_iter.next().unwrap());
-        }
-        let next_square = next_prime_map[&ps.square];   // why do I need it here, too?
-
-        if !next_prime_map.contains_key(&ps.cube) {
-            next_prime_map.insert(ps.cube, prime_iter.next().unwrap());
-        }
-        let next_cube = next_prime_map[&ps.cube];
-
-        if !next_prime_map.contains_key(&ps.fourth) {
-            next_prime_map.insert(ps.fourth, prime_iter.next().unwrap());
-        }
-        let next_fourth = next_prime_map[&ps.fourth];
+        let next_square = *next_prime_map.entry(ps.square).or_insert_with(|| prime_iter.next().unwrap());  // why doesn't this take a reference, but contains_key does?
+        let next_cube = *next_prime_map.entry(ps.cube).or_insert_with(|| prime_iter.next().unwrap());
+        let next_fourth = *next_prime_map.entry(ps.fourth).or_insert_with(|| prime_iter.next().unwrap());
 
         pq.push(PrimeStuff{ square: next_square, cube: ps.cube, fourth: ps.fourth}, Reverse(i64::pow(next_square,2) + i64::pow(ps.cube,3) + i64::pow(ps.fourth,4)));
         pq.push(PrimeStuff{ square: ps.square, cube: next_cube, fourth: ps.fourth}, Reverse(i64::pow(ps.square,2) + i64::pow(next_cube,3) + i64::pow(ps.fourth,4)));

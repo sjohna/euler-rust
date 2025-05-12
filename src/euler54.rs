@@ -6,7 +6,7 @@ use std::path::Path;
 
 pub fn euler54() -> i32 {
     let path = Path::new("./files/0054_poker.txt");
-    let file = match File::open(&path) {    // why is mut not needed here?
+    let file = match File::open(path) {    // why is mut not needed here?
         Err(why) => panic!("Couldn't open {}: {}", path.display(), why),
         Ok(file) => file,
     };
@@ -58,8 +58,8 @@ fn hand_score(hand: &[&str]) -> u64 {
 
     let mut score = 0_u64;
 
-    for i in 0..5 {
-        score |= ranks[i] << (i*4);
+    for (i, item) in ranks.iter().enumerate().take(5) {
+        score |= item << (i*4);
     }
 
     let pair = 1 << 28;

@@ -8,7 +8,7 @@ pub fn euler44_priority_queue() -> i64 {
     let mut pq = PriorityQueue::<(i64,i64), Reverse<i64>>::new();
     let mut next_pentagonal = HashMap::<i64,i64>::new();
 
-    let mut pentagonal_iter = (1..).map(|n| pentagonal_number(n));
+    let mut pentagonal_iter = (1..).map(pentagonal_number);
 
     let first_pentagonal  = pentagonal_iter.next().unwrap();
     let mut last_pentagonal = pentagonal_iter.next().unwrap();
@@ -33,9 +33,7 @@ pub fn euler44_priority_queue() -> i64 {
             return diff
         }
 
-        if !next_pentagonal.contains_key(&pent_pair.1) {
-            next_pentagonal.insert(pent_pair.1, pentagonal_iter.next().unwrap());
-        }
+        next_pentagonal.entry(pent_pair.1).or_insert_with(|| pentagonal_iter.next().unwrap());
 
         pq.push((pent_pair.0, next_pentagonal[&pent_pair.1]), Reverse(next_pentagonal[&pent_pair.1] - pent_pair.0));
 

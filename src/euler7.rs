@@ -1,7 +1,7 @@
 use crate::util;
 
 pub fn euler7_iterator() -> i64 {
-    std::iter::from_fn(util::primes()).skip(10_000).next().unwrap()
+    std::iter::from_fn(util::primes()).nth(10_000).unwrap()
 }
 
 #[cfg(test)]

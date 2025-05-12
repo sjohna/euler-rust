@@ -68,7 +68,7 @@ pub fn choose(n: i32, r: i32) -> BigInt {
 pub fn factorial(n: i32) -> BigInt {
     let mut fac = BigInt::from(1);
     for i in 1..=n {
-        fac = fac * BigInt::from(i);
+        fac *= BigInt::from(i);
     }
 
     fac
