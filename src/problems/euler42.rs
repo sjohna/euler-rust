@@ -5,7 +5,7 @@ use std::path::Path;
 use crate::util::triangular_number;
 
 pub fn euler42() -> i64 {
-    let path = Path::new("./files/0042_words.txt");
+    let path = Path::new("../../files/0042_words.txt");
     let mut file = match File::open(path) {
         Err(why) => panic!("Couldn't open {}: {}", path.display(), why),
         Ok(file) => file,

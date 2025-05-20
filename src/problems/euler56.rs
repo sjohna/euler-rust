@@ -1,6 +1,6 @@
 use num_bigint::{BigInt, ToBigInt};
 
-pub fn euler56_loops() -> i64 {
+pub fn loops() -> i64 {
     let mut max_sum = 0;
     for a in 1..=100 {
         for b in 1..=100 {
@@ -31,6 +31,6 @@ fn digit_sum(n: BigInt) -> i64 {
 mod tests {
     #[test]
     fn euler56_loops() {
-        assert_eq!(super::euler56_loops(), 972);
+        assert_eq!(super::loops(), 972);
     }
 }

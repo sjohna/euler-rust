@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn euler14_iter() -> i64 {
+pub fn iter() -> i64 {
     let mut sequence_lengths = HashMap::<i64, i64>::new();
 
     sequence_lengths.insert(1, 1);
@@ -30,10 +30,8 @@ fn next_value(n: i64) -> i64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::euler14::euler14_iter;
-
     #[test]
-    fn test_euler14_iter() {
-        assert_eq!(euler14_iter(), 837799);
+    fn iter() {
+        assert_eq!(super::iter(), 837799);
     }
 }

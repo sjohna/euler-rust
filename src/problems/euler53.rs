@@ -1,7 +1,7 @@
 use num_bigint::BigInt;
 use crate::util::choose;    // why is this crate::util::, and not just util::, like the previous use?
 
-pub fn euler53_bigint() -> i32{
+pub fn bigint() -> i32{
     let mut total = 0;
     let threshold = BigInt::from(1_000_000);
 
@@ -17,7 +17,7 @@ pub fn euler53_bigint() -> i32{
     total
 }
 
-pub fn euler53_nobigint() -> i32 {
+pub fn nobigint() -> i32 {
     let mut total = 0;
 
     for n in 1..=100 {
@@ -38,12 +38,12 @@ pub fn euler53_nobigint() -> i32 {
 #[cfg(test)]
 mod tests {
     #[test]
-    fn euler53_bigint() {
-        assert_eq!(super::euler53_bigint(),4075);
+    fn bigint() {
+        assert_eq!(super::bigint(), 4075);
     }
 
     #[test]
-    fn euler53_nobigint() {
-        assert_eq!(super::euler53_nobigint(),4075);
+    fn nobigint() {
+        assert_eq!(super::nobigint(), 4075);
     }
 }

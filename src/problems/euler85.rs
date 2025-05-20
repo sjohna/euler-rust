@@ -2,7 +2,7 @@ use std::cmp::Reverse;
 use priority_queue::PriorityQueue;
 use crate::util::triangular_number;
 
-pub fn euler85_priority_queue() -> i64 {
+pub fn priority_queue() -> i64 {
     let mut pq = PriorityQueue::<Rectangle, Reverse<i64>>::new();
 
     pq.push(Rectangle{width: 1, height: 1}, Reverse(1));
@@ -62,7 +62,7 @@ impl Rectangle {
 #[cfg(test)]
 mod tests {
     #[test]
-    fn euler85_priority_queue() {
-        assert_eq!(super::euler85_priority_queue(), 2772)
+    fn priority_queue() {
+        assert_eq!(super::priority_queue(), 2772)
     }
 }

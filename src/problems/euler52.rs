@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn euler52_naive_loop() -> i64 {
+pub fn naive_loop() -> i64 {
 
     for magnitude in 5.. {  // need 6 digits
         let base = 10i64.pow(magnitude);
@@ -38,7 +38,7 @@ fn to_hash_map(s: &str) -> HashMap<char, i32> {
 #[cfg(test)]
 mod tests {
     #[test]
-    fn euler52_naive_loop() {
-        assert_eq!(super::euler52_naive_loop(), 142857);
+    fn naive_loop() {
+        assert_eq!(super::naive_loop(), 142857);
     }
 }

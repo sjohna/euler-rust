@@ -5,7 +5,7 @@ use std::io::BufRead;
 use std::path::Path;
 
 pub fn euler54() -> i32 {
-    let path = Path::new("./files/0054_poker.txt");
+    let path = Path::new("../../files/0054_poker.txt");
     let file = match File::open(path) {    // why is mut not needed here?
         Err(why) => panic!("Couldn't open {}: {}", path.display(), why),
         Ok(file) => file,
@@ -161,7 +161,7 @@ fn hand_score(hand: &[&str]) -> u64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::euler54::hand_score;
+    use crate::problems::euler54::hand_score;
 
     #[test]
     fn hand_score_comparison() {

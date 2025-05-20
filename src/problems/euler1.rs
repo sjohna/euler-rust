@@ -1,4 +1,4 @@
-pub fn euler1_loop() -> i32 {
+pub fn simple_loop() -> i32 {
     let mut sum = 0;
 
     for n in 1..1000 {
@@ -10,11 +10,11 @@ pub fn euler1_loop() -> i32 {
     sum
 }
 
-pub fn euler1_iterator() -> i32 {
+pub fn iterator() -> i32 {
     (1..1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
 }
 
-pub fn euler1_custom_iterator_function() -> i32 {
+pub fn custom_iterator_function() -> i32 {
     std::iter::from_fn(natural_numbers()).take_while(|n| n < &1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()  // what is the & I need before the literal 1000 in the take_while?
 }
 
@@ -28,18 +28,19 @@ fn natural_numbers() -> impl FnMut() -> Option<i32> {   // this needs to be FnMu
 
 #[cfg(test)]
 mod tests {
+    // TODO: make these take a number, do tests on array of test tuples or structs
     #[test]
-    fn euler1_loop() {
-        assert_eq!(super::euler1_loop(), 233168);
+    fn simple_loop() {
+        assert_eq!(super::simple_loop(), 233168);
     }
 
     #[test]
-    fn euler1_iterator() {
-        assert_eq!(super::euler1_iterator(), 233168);
+    fn iterator() {
+        assert_eq!(super::iterator(), 233168);
     }
 
     #[test]
-    fn euler1_custom_iterator_function() {
-        assert_eq!(super::euler1_custom_iterator_function(), 233168);
+    fn custom_iterator_function() {
+        assert_eq!(super::custom_iterator_function(), 233168);
     }
 }

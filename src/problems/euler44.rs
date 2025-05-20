@@ -4,7 +4,7 @@ use priority_queue::PriorityQueue;
 use crate::util::pentagonal_number;
 
 // slow, there's probably a faster way to do this
-pub fn euler44_priority_queue() -> i64 {
+pub fn priority_queue() -> i64 {
     let mut pq = PriorityQueue::<(i64,i64), Reverse<i64>>::new();
     let mut next_pentagonal = HashMap::<i64,i64>::new();
 

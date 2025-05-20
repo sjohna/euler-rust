@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub fn euler38_naive_loop() -> i32 {
+pub fn naive_loop() -> i32 {
     let mut desired_set = HashSet::<char>::new();
     for c in "123456789".chars() {
         desired_set.insert(c);
@@ -50,7 +50,7 @@ fn to_hash_set(s: &str) -> Option<HashSet<char>> {  // this doesn't have a :: be
 #[cfg(test)]
 mod tests {
     #[test]
-    fn euler38_naive_loop() {
-        assert_eq!(super::euler38_naive_loop(), 932718654);
+    fn naive_loop() {
+        assert_eq!(super::naive_loop(), 932718654);
     }
 }

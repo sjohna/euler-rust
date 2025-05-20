@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use priority_queue::PriorityQueue;
 use crate::util;
 
-pub fn euler87_priority_queue() -> i32 {
+pub fn priority_queue() -> i32 {
     #[derive(Eq, Hash, PartialEq)]  // need this to satisfy the type requirements of PriorityQueue. Are there default implementations of these traits for structs?
     struct PrimeStuff {
         square: i64,
@@ -36,7 +36,7 @@ pub fn euler87_priority_queue() -> i32 {
         }
 
 
-        let next_square = *next_prime_map.entry(ps.square).or_insert_with(|| prime_iter.next().unwrap());  // why doesn't this take a reference, but contains_key does?
+        let next_square = *next_prime_map.entry(ps.square).or_insert_with(|| prime_iter.next().unwrap());
         let next_cube = *next_prime_map.entry(ps.cube).or_insert_with(|| prime_iter.next().unwrap());
         let next_fourth = *next_prime_map.entry(ps.fourth).or_insert_with(|| prime_iter.next().unwrap());
 
@@ -51,7 +51,7 @@ pub fn euler87_priority_queue() -> i32 {
 #[cfg(test)]
 mod tests {
     #[test]
-    fn euler87_priority_queue() {
-        assert_eq!(super::euler87_priority_queue(), 1097343)
+    fn priority_queue() {
+        assert_eq!(super::priority_queue(), 1097343)
     }
 }

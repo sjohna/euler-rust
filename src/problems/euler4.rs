@@ -1,6 +1,6 @@
 use priority_queue::PriorityQueue;
 
-pub fn euler4_loops() -> i32 {
+pub fn loops() -> i32 {
     let mut max_palindrome = 0;
     for a in 100..1000 {
         for b in a..1000 {
@@ -14,7 +14,7 @@ pub fn euler4_loops() -> i32 {
     max_palindrome
 }
 
-pub fn euler4_priority_queue() -> i32 {
+pub fn priority_queue() -> i32 {
     #[derive(Eq, Hash, PartialEq)]  // need this to satisfy the type requirements of PriorityQueue. Are there default implementations of these traits for structs?
     struct Multiplicands {
         a: i32,
@@ -48,12 +48,12 @@ fn is_palindrome(n: i32) -> bool {
 #[cfg(test)]
 mod tests {
     #[test]
-    fn euler4_loops() {
-        assert_eq!(super::euler4_loops(), 906609);
+    fn loops() {
+        assert_eq!(super::loops(), 906609);
     }
 
     #[test]
-    fn euler4_priority_queue() {
-        assert_eq!(super::euler4_priority_queue(), 906609)
+    fn priority_queue() {
+        assert_eq!(super::priority_queue(), 906609)
     }
 }

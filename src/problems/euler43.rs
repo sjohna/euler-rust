@@ -1,4 +1,4 @@
-pub fn euler43_naive_loops() -> i64 {
+pub fn naive_loops() -> i64 {
     let mut sum: i64 = 0;
 
     // very naive...
