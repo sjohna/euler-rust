@@ -1,7 +1,9 @@
-pub fn simple_loop() -> i32 {
+type Impl = fn(i64) -> i64;
+
+pub fn simple_loop(n: i64) -> i64 {
     let mut sum = 0;
 
-    for n in 1..1000 {
+    for n in 1..n {
         if n % 3 == 0 || n % 5 == 0 {
             sum += n;
         }
@@ -10,17 +12,17 @@ pub fn simple_loop() -> i32 {
     sum
 }
 
-pub fn iterator() -> i32 {
-    (1..1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
+pub fn iterator(n: i64) -> i64 {
+    (1..n).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
 }
 
-pub fn custom_iterator_function() -> i32 {
-    std::iter::from_fn(natural_numbers()).take_while(|n| n < &1000).filter(|n| n % 3 == 0 || n % 5 == 0).sum()  // what is the & I need before the literal 1000 in the take_while?
+pub fn custom_iterator_function(max: i64) -> i64 {
+    std::iter::from_fn(natural_numbers()).take_while(|n| *n < max).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
 }
 
-fn natural_numbers() -> impl FnMut() -> Option<i32> {   // this needs to be FnMut instead of Fn. What's the difference?
+fn natural_numbers() -> impl FnMut() -> Option<i64> {
     let mut num = 0;
-    move || -> Option<i32> {    // I need `move` here or I get heinous compiler errors. What's this doing?
+    move || -> Option<i64> {
         num += 1;
         Some(num)
     }
@@ -28,19 +30,28 @@ fn natural_numbers() -> impl FnMut() -> Option<i32> {   // this needs to be FnMu
 
 #[cfg(test)]
 mod tests {
-    // TODO: make these take a number, do tests on array of test tuples or structs
+    const TESTS: [(i64, i64); 1] = [
+        (1000,233168),
+    ];
+
+    fn test(func: super::Impl) {
+        for tc in TESTS {
+            assert_eq!(func(tc.0), tc.1);
+        }
+    }
+
     #[test]
     fn simple_loop() {
-        assert_eq!(super::simple_loop(), 233168);
+        test(super::simple_loop);
     }
 
     #[test]
     fn iterator() {
-        assert_eq!(super::iterator(), 233168);
+        test(super::iterator);
     }
 
     #[test]
     fn custom_iterator_function() {
-        assert_eq!(super::custom_iterator_function(), 233168);
+        test(super::custom_iterator_function);
     }
 }
