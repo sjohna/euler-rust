@@ -4,7 +4,7 @@ use priority_queue::PriorityQueue;
 use crate::util;
 
 pub fn priority_queue() -> i32 {
-    #[derive(Eq, Hash, PartialEq)]  // need this to satisfy the type requirements of PriorityQueue. Are there default implementations of these traits for structs?
+    #[derive(Eq, Hash, PartialEq)]
     struct PrimeStuff {
         square: i64,
         cube: i64,
@@ -16,7 +16,7 @@ pub fn priority_queue() -> i32 {
 
     let first_prime = prime_iter.next().unwrap();
 
-    let mut pq = PriorityQueue::<PrimeStuff, Reverse<i64>>::new();  // what's the difference between Reverse(i32) and Reverse<i32> here? I see examples of the former, I think, but with it the next line doesn't compile here.
+    let mut pq = PriorityQueue::<PrimeStuff, Reverse<i64>>::new();
     pq.push(PrimeStuff {square: first_prime, cube: first_prime, fourth: first_prime}, Reverse(i64::pow(first_prime,2) + i64::pow(first_prime,3) + i64::pow(first_prime,4)));
 
     let mut total = 0;
