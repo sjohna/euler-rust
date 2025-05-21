@@ -1,7 +1,7 @@
-use crate::util;
+use crate::util::prime;
 
 pub fn iterator() -> i64 {
-    std::iter::from_fn(util::primes()).nth(10_000).unwrap()
+    prime::iter::naive_trial_division().nth(10_000).unwrap()
 }
 
 #[cfg(test)]

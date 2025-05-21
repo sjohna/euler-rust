@@ -1,7 +1,7 @@
 use std::cmp::Reverse;
 use std::collections::HashMap;
 use priority_queue::PriorityQueue;
-use crate::util;
+use crate::util::prime;
 
 pub fn priority_queue() -> i32 {
     #[derive(Eq, Hash, PartialEq)]
@@ -12,7 +12,7 @@ pub fn priority_queue() -> i32 {
     }
 
     let mut next_prime_map = HashMap::<i64,i64>::new();
-    let mut prime_iter = std::iter::from_fn(util::primes());
+    let mut prime_iter = prime::iter::naive_trial_division();
 
     let first_prime = prime_iter.next().unwrap();
 

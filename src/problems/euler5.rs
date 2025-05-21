@@ -1,7 +1,7 @@
-use crate::util;
+use crate::util::integer;
 
 pub fn iter() -> i64 {
-    (1..=20).reduce(util::lcm).unwrap()
+    (1..=20).reduce(integer::lcm).unwrap()
 }
 
 #[cfg(test)]

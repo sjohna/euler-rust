@@ -1,5 +1,5 @@
 use std::iter::once;
-use crate::util;
+use crate::util::prime;
 
 type Impl = fn(i64) -> i64;
 
@@ -44,7 +44,7 @@ pub fn all_together(mut num: i64) -> i64 {
 }
 
 pub fn iterator(mut num: i64) -> i64 {
-    let mut primes = std::iter::from_fn(util::primes());
+    let mut primes = prime::iter::naive_trial_division();
 
     let mut curr_prime = primes.next().unwrap();
 
