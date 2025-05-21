@@ -1,11 +1,13 @@
 use crate::util;
 
-pub fn simple_loop() -> i32 {
+type Impl = fn(i64) -> i64;
+
+pub fn simple_loop(threshold: i64) -> i64 {
     let mut prev = 0;
     let mut curr = 1;
     let mut sum = 0;
 
-    while curr < 4_000_000 {
+    while curr < threshold {
         if curr % 2 == 0 {
             sum += curr
         }
@@ -18,20 +20,27 @@ pub fn simple_loop() -> i32 {
     sum
 }
 
-pub fn custom_iterator_function() -> i64 {
-    std::iter::from_fn(util::fibonacci_sequence()).take_while(|n| *n < 4_000_000).filter(|n| n % 2 == 0).sum()  // I don't need the explicit type annotation for sum here like I do in problem 1. Why?
-    // also: why do I need an '&' in the take_while ("n < &4_000_000"), but not in the filter (I *can* do "n % &2 == 0", but I don't get a compiler error if I don't)
+pub fn custom_iterator_function(threshold: i64) -> i64 {
+    std::iter::from_fn(util::fibonacci_sequence()).take_while(|n| *n < threshold).filter(|n| n % 2 == 0).sum()
 }
 
 #[cfg(test)]
 mod tests {
+    const TESTS: [(i64,i64);1] = [(4_000_000, 4_613_732)];
+
+    fn test(func: super::Impl) {
+        for tc in TESTS {
+            assert_eq!(func(tc.0), tc.1);
+        }
+    }
+
     #[test]
     fn simple_loop() {
-        assert_eq!(super::simple_loop(), 4_613_732);
+        test(super::simple_loop);
     }
 
     #[test]
     fn custom_iterator_function() {
-        assert_eq!(super::custom_iterator_function(), 4_613_732);
+        test(super::custom_iterator_function);
     }
 }
