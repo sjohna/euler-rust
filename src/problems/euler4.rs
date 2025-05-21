@@ -15,7 +15,7 @@ pub fn loops() -> i32 {
 }
 
 pub fn priority_queue() -> i32 {
-    #[derive(Eq, Hash, PartialEq)]  // need this to satisfy the type requirements of PriorityQueue. Are there default implementations of these traits for structs?
+    #[derive(Eq, Hash, PartialEq)]
     struct Multiplicands {
         a: i32,
         b: i32,

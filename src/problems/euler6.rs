@@ -1,7 +1,8 @@
 use std::iter::once;
 
 pub fn iters() -> i64 {
-    once((1..=100).sum()).map(|n: i64| n*n).last().unwrap() - (1..=100).map(|n: i64| n*n).sum::<i64>()  // not sure why I need this last type annotation on sum
+    let square = |n: i64| n*n;
+    once((1..=100).sum()).map(square).last().unwrap() - (1..=100).map(square).sum::<i64>()
 }
 
 #[cfg(test)]

@@ -5,7 +5,15 @@ pub fn iter() -> i64 {
 
     sequence_lengths.insert(1, 1);
 
-    (1..=1_000_000).map(|n| (n, sequence_length(&mut sequence_lengths, n))).reduce(|x,y| if x.1 > y.1 { x } else { y } ).unwrap().0
+    let sequence_length = |n: i64| sequence_length(&mut sequence_lengths, n);
+
+    (1..=1_000_000_i64).map(on_enumeration(sequence_length)).max_by_key(|x| x.1).unwrap().0
+}
+
+fn on_enumeration<T: Clone,R>(mut func: impl FnMut(T) -> R) -> impl FnMut(T) -> (T,R) {
+    move |t: T| {
+        (t.clone(), func(t))
+    }
 }
 
 fn sequence_length(cache: &mut HashMap::<i64, i64>, n: i64) -> i64 {
