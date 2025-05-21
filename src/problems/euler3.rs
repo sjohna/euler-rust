@@ -1,12 +1,15 @@
 use std::iter::once;
 use crate::util;
 
-pub fn all_together() -> i64 {
-    // calculate primes and then divide them out of the number all at once
+type Impl = fn(i64) -> i64;
 
-    let mut num : i64 = 600851475143;
+pub fn all_together(mut num: i64) -> i64 {
+    // divide out all factors of 2
+    while num % 2 == 0 {
+        num /= 2
+    }
 
-    // no factors of 2 in the number, so start with 3
+    // divide out primes 3 and up
     let mut next_prime = 3;
     loop {
         while num % next_prime == 0 {
@@ -40,9 +43,8 @@ pub fn all_together() -> i64 {
     }
 }
 
-pub fn iterator() -> i64 {
-    let mut num : i64 = 600851475143;
-    let mut primes = std::iter::from_fn(util::primes());    // if I don't make this mut, I get an error on the next line: cannot borrow immutable local variable primes as mutable. What gives?
+pub fn iterator(mut num: i64) -> i64 {
+    let mut primes = std::iter::from_fn(util::primes());
 
     let mut curr_prime = primes.next().unwrap();
 
@@ -61,13 +63,21 @@ pub fn iterator() -> i64 {
 
 #[cfg(test)]
 mod tests {
+    const TESTS: [(i64,i64); 1] = [(600851475143, 6857)];
+
+    fn test(func: super::Impl) {
+        for tc in TESTS {
+            assert_eq!(func(tc.0), tc.1);
+        }
+    }
+
     #[test]
     fn all_together() {
-        assert_eq!(super::all_together(), 6857);
+        test(super::all_together);
     }
 
     #[test]
     fn iterator() {
-        assert_eq!(super::iterator(), 6857);
+        test(super::iterator);
     }
 }
