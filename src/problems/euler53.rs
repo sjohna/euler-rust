@@ -1,5 +1,5 @@
 use num_bigint::BigInt;
-use crate::util::choose;
+use crate::util::integer;
 
 pub fn bigint() -> i32{
     let mut total = 0;
@@ -7,7 +7,7 @@ pub fn bigint() -> i32{
 
     for n in 1..=100 {
         for r in 0..=n {
-            let val = choose(n,r);
+            let val = integer::choose::<BigInt>(n,r);
             if val > threshold {
                 total += 1;
             }

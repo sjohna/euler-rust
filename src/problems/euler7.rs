@@ -1,7 +1,7 @@
 use crate::util::prime;
 
 pub fn iterator(n: usize) -> i64 {
-    prime::iter::naive_trial_division().nth(n-1).unwrap()
+    prime::seq::naive_trial_division().nth(n-1).unwrap()
 }
 
 #[cfg(test)]

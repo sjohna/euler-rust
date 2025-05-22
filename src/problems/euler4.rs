@@ -1,11 +1,12 @@
 use priority_queue::PriorityQueue;
+use crate::util::integer;
 
 pub fn loops() -> i32 {
     let mut max_palindrome = 0;
     for a in 100..1000 {
         for b in a..1000 {
             let product = a * b;
-            if is_palindrome(product) && product > max_palindrome {
+            if integer::is_palindrome(product) && product > max_palindrome {
                 max_palindrome = product;
             }
         }
@@ -26,7 +27,7 @@ pub fn priority_queue() -> i32 {
     pq.push(Multiplicands { a: 999, b: 999 }, 999*999);
     while !pq.is_empty() {
         let (mults, product) = pq.pop().unwrap();
-        if is_palindrome(product) {
+        if integer::is_palindrome(product) {
             return product
         }
 
@@ -38,11 +39,6 @@ pub fn priority_queue() -> i32 {
 
     // shouldn't happen...
     -1
-}
-
-fn is_palindrome(n: i32) -> bool {
-    let s = n.to_string();
-    s.chars().rev().collect::<String>() == s
 }
 
 #[cfg(test)]

@@ -2,33 +2,10 @@ use std::ops::Mul;
 use std::time::{Duration, SystemTime};
 use num_bigint::BigInt;
 
-pub fn fibonacci_sequence() -> impl FnMut() -> Option<i64> {
-    let (mut curr, mut next): (i64, i64) = (0,1);
-    move || -> Option<i64> {
-        (curr, next) = (next, curr + next);
-        Some(curr)
+pub fn graph_of<T: Clone,R>(mut func: impl FnMut(T) -> R) -> impl FnMut(T) -> (T, R) {
+    move |t: T| {
+        (t.clone(), func(t))
     }
-}
-
-pub fn triangular_number(n: i64) -> i64 {
-    (n * (n + 1)) / 2
-}
-
-pub fn pentagonal_number(n: i64) -> i64 {
-    (n * (3*n - 1)) / 2
-}
-
-pub fn choose(n: i32, r: i32) -> BigInt {
-    factorial(n) / (factorial(r) * factorial(n-r))
-}
-
-pub fn factorial(n: i32) -> BigInt {
-    let mut fac = BigInt::from(1);
-    for i in 1..=n {
-        fac *= BigInt::from(i);
-    }
-
-    fac
 }
 
 pub fn root_digit_sum(n: i32, digits: i32) -> i32 {
@@ -68,39 +45,6 @@ pub fn digit_sum(n: BigInt) -> i32 {
     }
 
     sum
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn triangular_number() {
-        assert_eq!(super::triangular_number(1), 1);
-        assert_eq!(super::triangular_number(2), 3);
-        assert_eq!(super::triangular_number(3), 6);
-        assert_eq!(super::triangular_number(4), 10);
-        assert_eq!(super::triangular_number(5), 15);
-        assert_eq!(super::triangular_number(6), 21);
-        assert_eq!(super::triangular_number(7), 28);
-        assert_eq!(super::triangular_number(8), 36);
-        assert_eq!(super::triangular_number(9), 45);
-        assert_eq!(super::triangular_number(10), 55);
-        assert_eq!(super::triangular_number(100), 5050);
-        assert_eq!(super::triangular_number(1000), 500500);
-    }
-
-    #[test]
-    fn pentagonal_number() {
-        assert_eq!(super::pentagonal_number(1), 1);
-        assert_eq!(super::pentagonal_number(2), 5);
-        assert_eq!(super::pentagonal_number(3), 12);
-        assert_eq!(super::pentagonal_number(4), 22);
-        assert_eq!(super::pentagonal_number(5), 35);
-        assert_eq!(super::pentagonal_number(6), 51);
-        assert_eq!(super::pentagonal_number(7), 70);
-        assert_eq!(super::pentagonal_number(8), 92);
-        assert_eq!(super::pentagonal_number(9), 117);
-        assert_eq!(super::pentagonal_number(10), 145);
-    }
 }
 
 pub fn table<T: ToString + Copy,V: std::fmt::Display>(inputs: &[T], func: fn(T) -> V) {

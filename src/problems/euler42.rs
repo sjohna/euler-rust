@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
-use crate::util::triangular_number;
+use crate::util::integer;
 
 pub fn euler42() -> i64 {
     let path = Path::new("../../files/0042_words.txt");
@@ -18,7 +18,7 @@ pub fn euler42() -> i64 {
 
     let words = contents.split(',');
 
-    let mut triangle_iter = (1..).map(triangular_number);
+    let mut triangle_iter = (1..).map(integer::triangular_number);
     let mut largest_triangle_number = 0;
     let mut triangular_numbers = HashSet::<i64>::new();
 

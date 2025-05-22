@@ -1,6 +1,6 @@
 use std::cmp::Reverse;
 use priority_queue::PriorityQueue;
-use crate::util::triangular_number;
+use crate::util::integer;
 
 pub fn priority_queue() -> i64 {
     let mut pq = PriorityQueue::<Rectangle, Reverse<i64>>::new();
@@ -51,7 +51,7 @@ struct Rectangle {
 
 impl Rectangle {
     fn sub_rectangles(&self) -> i64 {
-        triangular_number(self.width) * triangular_number(self.height)
+        integer::triangular_number(self.width) * integer::triangular_number(self.height)
     }
 
     fn area(&self) -> i64 {

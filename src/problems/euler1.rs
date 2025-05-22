@@ -1,4 +1,4 @@
-use crate::util;
+use crate::util::integer;
 
 type Impl = fn(i64) -> i64;
 
@@ -10,7 +10,7 @@ pub fn brute_force(n: i64) -> i64 {
 
 pub fn closed_form(n: i64) -> i64 {
     let max = n-1;
-    3*util::triangular_number(max/3) + 5*util::triangular_number(max/5) - 15*util::triangular_number(max/15)
+    3*integer::triangular_number(max/3) + 5*integer::triangular_number(max/5) - 15*integer::triangular_number(max/15)
 }
 
 #[cfg(test)]

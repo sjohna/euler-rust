@@ -1,14 +1,14 @@
 use std::cmp::Reverse;
 use std::collections::HashMap;
 use priority_queue::PriorityQueue;
-use crate::util::pentagonal_number;
+use crate::util::integer;
 
 // slow, there's probably a faster way to do this
 pub fn priority_queue() -> i64 {
     let mut pq = PriorityQueue::<(i64,i64), Reverse<i64>>::new();
     let mut next_pentagonal = HashMap::<i64,i64>::new();
 
-    let mut pentagonal_iter = (1..).map(pentagonal_number);
+    let mut pentagonal_iter = (1..).map(integer::pentagonal_number);
 
     let first_pentagonal  = pentagonal_iter.next().unwrap();
     let mut last_pentagonal = pentagonal_iter.next().unwrap();

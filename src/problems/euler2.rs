@@ -1,4 +1,4 @@
-use crate::util;
+use crate::util::integer;
 
 type Impl = fn(i64) -> i64;
 
@@ -21,7 +21,7 @@ pub fn simple_loop(threshold: i64) -> i64 {
 }
 
 pub fn custom_iterator_function(threshold: i64) -> i64 {
-    std::iter::from_fn(util::fibonacci_sequence()).take_while(|n| *n < threshold).filter(|n| n % 2 == 0).sum()
+    integer::seq::fibonacci().take_while(|n| *n < threshold).filter(|n| n % 2 == 0).sum()
 }
 
 #[cfg(test)]

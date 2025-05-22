@@ -12,7 +12,7 @@ pub fn priority_queue() -> i32 {
     }
 
     let mut next_prime_map = HashMap::<i64,i64>::new();
-    let mut prime_iter = prime::iter::naive_trial_division();
+    let mut prime_iter = prime::seq::naive_trial_division();
 
     let first_prime = prime_iter.next().unwrap();
 
