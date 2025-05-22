@@ -1,23 +1,9 @@
+use crate::util;
+
 type Impl = fn(i64) -> i64;
 
-pub fn simple_loop(n: i64) -> i64 {
-    let mut sum = 0;
-
-    for n in 1..n {
-        if n % 3 == 0 || n % 5 == 0 {
-            sum += n;
-        }
-    }
-
-    sum
-}
-
-pub fn iterator(n: i64) -> i64 {
+pub fn brute_force(n: i64) -> i64 {
     (1..n).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
-}
-
-pub fn custom_iterator_function(max: i64) -> i64 {
-    std::iter::from_fn(natural_numbers()).take_while(|n| *n < max).filter(|n| n % 3 == 0 || n % 5 == 0).sum()
 }
 
 fn natural_numbers() -> impl FnMut() -> Option<i64> {
@@ -26,6 +12,11 @@ fn natural_numbers() -> impl FnMut() -> Option<i64> {
         num += 1;
         Some(num)
     }
+}
+
+fn closed_form(n: i64) -> i64 {
+    let max = n-1;
+    3*util::triangular_number(max/3) + 5*util::triangular_number(max/5) - 15*util::triangular_number(max/15)
 }
 
 #[cfg(test)]
@@ -41,17 +32,12 @@ mod tests {
     }
 
     #[test]
-    fn simple_loop() {
-        test(super::simple_loop);
+    fn brute_force() {
+        test(super::brute_force);
     }
 
     #[test]
-    fn iterator() {
-        test(super::iterator);
-    }
-
-    #[test]
-    fn custom_iterator_function() {
-        test(super::custom_iterator_function);
+    fn closed_form() {
+        test(super::closed_form);
     }
 }

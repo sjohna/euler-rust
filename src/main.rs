@@ -4,5 +4,5 @@ mod util;
 mod problems;
 
 fn main() {
-    println!("{}", problems::euler1::simple_loop(1000));
+    println!("{}", problems::euler1::brute_force(1000));
 }
