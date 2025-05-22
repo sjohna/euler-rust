@@ -29,7 +29,7 @@ pub fn priority_queue() -> i64 {
             last_pentagonal = next_num;
         }
 
-        if next_pentagonal.contains_key(&diff) && next_pentagonal.contains_key(&sum) {  // why do I need &s here?
+        if next_pentagonal.contains_key(&diff) && next_pentagonal.contains_key(&sum) {
             return diff
         }
 

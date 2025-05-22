@@ -37,7 +37,7 @@ fn to_hash_set(s: &str) -> Option<HashSet<char>> {  // this doesn't have a :: be
     let mut set = HashSet::<char>::new();
 
     for c in s.chars() {
-        if set.contains(&c) {   // why does this need a &?
+        if set.contains(&c) {
             return None;
         }
 

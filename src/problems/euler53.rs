@@ -1,5 +1,5 @@
 use num_bigint::BigInt;
-use crate::util::choose;    // why is this crate::util::, and not just util::, like the previous use?
+use crate::util::choose;
 
 pub fn bigint() -> i32{
     let mut total = 0;

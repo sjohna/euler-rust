@@ -1,13 +1,13 @@
 use crate::util::prime;
 
-pub fn iterator() -> i64 {
-    prime::iter::naive_trial_division().nth(10_000).unwrap()
+pub fn iterator(n: usize) -> i64 {
+    prime::iter::naive_trial_division().nth(n-1).unwrap()
 }
 
 #[cfg(test)]
 mod tests {
     #[test]
     fn iterator() {
-        assert_eq!(super::iterator(), 104743)
+        assert_eq!(super::iterator(10_001), 104743)
     }
 }

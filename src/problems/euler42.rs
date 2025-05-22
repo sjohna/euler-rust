@@ -16,7 +16,7 @@ pub fn euler42() -> i64 {
 
     let mut num_triangle_words = 0;
 
-    let words = contents.split(',');    // this iterator doesn't need to be mut, and the compiler suggests I remove it if I have it. Why? Aren't we mutating the iterator when we iterate over it?
+    let words = contents.split(',');
 
     let mut triangle_iter = (1..).map(triangular_number);
     let mut largest_triangle_number = 0;
@@ -24,7 +24,7 @@ pub fn euler42() -> i64 {
 
     for raw_word in words {
         let word = raw_word.trim_matches('"');
-        let word_sum = word.chars().map(|c| (c as i64 - 'A' as i64) + 1).sum::<i64>(); // without the ::<i64> on the sum, this has all kinds of errors. Why?
+        let word_sum = word.chars().map(|c| (c as i64 - 'A' as i64) + 1).sum::<i64>();
 
         while word_sum > largest_triangle_number {
             let next_triangular_number = triangle_iter.next().unwrap();
