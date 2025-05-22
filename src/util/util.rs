@@ -1,3 +1,5 @@
+use std::ops::Mul;
+use std::time::{Duration, SystemTime};
 use num_bigint::BigInt;
 
 pub fn fibonacci_sequence() -> impl FnMut() -> Option<i64> {
@@ -99,4 +101,43 @@ mod tests {
         assert_eq!(super::pentagonal_number(9), 117);
         assert_eq!(super::pentagonal_number(10), 145);
     }
+}
+
+pub fn table<T: ToString + Copy,V: std::fmt::Display>(inputs: &[T], func: fn(T) -> V) {
+    let mut input_strings = Vec::new();
+    for input in inputs {
+        input_strings.push(input.to_string());
+    }
+
+    let max_length = input_strings.iter().map(|s| s.len()).max().unwrap();
+
+    for i in 0..inputs.len() {
+        print!("{:<max_length$} | ", input_strings[i]);
+        let (output, elapsed) = time(func, inputs[i]);
+        print!("{} ({:?})\n", output, elapsed);
+    }
+}
+
+pub fn time<T,V>(func: fn(T) -> V, input: T) -> (V, Duration) {
+    let start = SystemTime::now();
+    let output = func(input);
+    let elapsed = start.elapsed().unwrap();
+    (output, elapsed)
+}
+
+// doesn't handle raising to a zero power
+pub fn pow_seq<T: Mul<Output = T> + Copy>(base: T, min: usize, max: usize) -> Vec<T> {
+    let mut pow = base;
+    for _ in 1..min {
+        pow = pow * base;
+    }
+
+    let mut ret = vec![pow];
+
+    for _ in min..max {
+        pow = pow * base;
+        ret.push(pow);
+    }
+
+    ret
 }

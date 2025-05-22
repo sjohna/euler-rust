@@ -4,5 +4,5 @@ mod util;
 mod problems;
 
 fn main() {
-    println!("{}", problems::euler1::brute_force(1000));
+    util::table(&util::pow_seq::<i64>(10,1,10), |n: i64| { n })
 }
