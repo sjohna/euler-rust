@@ -5,5 +5,5 @@ mod util;
 mod problems;
 
 fn main() {
-    println!("{}",problems::euler42::euler42())
+    println!("{}",problems::euler67::solve_it())
 }

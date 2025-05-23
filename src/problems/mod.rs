@@ -18,3 +18,4 @@ mod euler80;
 mod euler85;
 mod euler87;
 pub mod euler66;
+pub(crate) mod euler67;

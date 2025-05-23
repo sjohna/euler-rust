@@ -17,8 +17,7 @@ pub fn euler42() -> i64 {
 
     let words = contents.split(',');
 
-    let triangle_iter = (1..).map(integer::triangular_number);
-    let mut triangular_numbers = next_list::NextList::from_iter(Box::new(triangle_iter));
+    let mut triangular_numbers = next_list::NextList::from_iter(Box::new((1..).map(integer::triangular_number)));
 
     for raw_word in words {
         let word = raw_word.trim_matches('"');
