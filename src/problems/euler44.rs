@@ -1,19 +1,13 @@
 use std::cmp::Reverse;
-use std::collections::HashMap;
 use priority_queue::PriorityQueue;
-use crate::util::integer;
+use crate::util::{integer, next_list};
 
 // slow, there's probably a faster way to do this
 pub fn priority_queue() -> i64 {
     let mut pq = PriorityQueue::<(i64,i64), Reverse<i64>>::new();
-    let mut next_pentagonal = HashMap::<i64,i64>::new();
 
-    let mut pentagonal_iter = (1..).map(integer::pentagonal_number);
-
-    let first_pentagonal  = pentagonal_iter.next().unwrap();
-    let mut last_pentagonal = pentagonal_iter.next().unwrap();
-
-    next_pentagonal.insert(first_pentagonal, last_pentagonal);
+    let pentagonal_iter = (1..).map(integer::pentagonal_number);
+    let mut next_pentagonal = next_list::NextList::from_iter(Box::new(pentagonal_iter));
 
     pq.push((1, 1), Reverse(0));
 
@@ -23,22 +17,18 @@ pub fn priority_queue() -> i64 {
 
         let sum = pent_pair.0 + pent_pair.1;
 
-        while sum > last_pentagonal {
-            let next_num = pentagonal_iter.next().unwrap();
-            next_pentagonal.insert(last_pentagonal, next_num);
-            last_pentagonal = next_num;
-        }
+        next_pentagonal.advance_to(sum);
 
-        if next_pentagonal.contains_key(&diff) && next_pentagonal.contains_key(&sum) {
+        if next_pentagonal.contains_key(diff) && next_pentagonal.contains_key(sum) {
             return diff
         }
 
-        next_pentagonal.entry(pent_pair.1).or_insert_with(|| pentagonal_iter.next().unwrap());
+        let next = next_pentagonal.next(pent_pair.1).unwrap();
 
-        pq.push((pent_pair.0, next_pentagonal[&pent_pair.1]), Reverse(next_pentagonal[&pent_pair.1] - pent_pair.0));
+        pq.push((pent_pair.0, next), Reverse(next - pent_pair.0));
 
-        if pent_pair.1 == next_pentagonal[&pent_pair.0] {
-            pq.push((pent_pair.1, next_pentagonal[&pent_pair.1]), Reverse(next_pentagonal[&pent_pair.1] - pent_pair.1));
+        if pent_pair.1 == next_pentagonal.next(pent_pair.0).unwrap() {
+            pq.push((pent_pair.1, next), Reverse(next - pent_pair.1));
         }
     }
 
