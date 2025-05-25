@@ -85,3 +85,26 @@ pub fn pow_seq<T: Mul<Output = T> + Copy>(base: T, min: usize, max: usize) -> Ve
 
     ret
 }
+
+// pub trait SelectAt {
+//     type T;
+//     fn select_at(&self, indices: &[usize]) -> &[Self::T];
+// }
+//
+// impl SelectAt for dyn Iterator<Item = Self::T> {
+//     type T = Iterator::Item;
+//
+//     fn select_at(&mut self, indices: &[usize]) -> &[Self::T] {
+//         let mut iter = self;
+//         let mut total = 0;
+//         let mut ret = vec![];
+//         for i in indices {
+//             let skip_here = i - 1 - total;
+//             iter = self.skip(skip_here).into_iter();
+//             ret.push(self.next().unwrap());
+//             total += skip_here;
+//         }
+//
+//         ret;
+//     }
+// }
