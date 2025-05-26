@@ -69,6 +69,13 @@ pub fn time<T,V>(func: fn(T) -> V, input: T) -> (V, Duration) {
     (output, elapsed)
 }
 
+pub fn time0<V>(func: fn() -> V) -> (V, Duration) {
+    let start = SystemTime::now();
+    let output = func();
+    let elapsed = start.elapsed().unwrap();
+    (output, elapsed)
+}
+
 pub fn time2<T1, T2, V>(func: fn(T1,T2) -> V, input1: T1, input2: T2) -> (V, Duration) {
     let start = SystemTime::now();
     let output = func(input1, input2);
