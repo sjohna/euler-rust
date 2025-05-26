@@ -20,6 +20,42 @@ pub fn prime_factorization(mut n: i64, primes: &[i64]) -> Vec<(i64,u32)> {
     m
 }
 
+// returns prime factorization of product of numbers in [min,max]
+// aka the prime factorization of factorial(max) / factorial(min-1)
+pub fn prime_factorization_of_product_of_range(min: i64, max: i64, primes: &[i64]) -> Vec<(i64,i64)> {
+    let mut ret = Vec::<(i64,i64)>::new();
+
+    'power_loop:
+    for power in 1.. {
+        for (index, prime) in primes.into_iter().enumerate() {
+            let prime_power = prime.pow(power);
+            if prime_power > max {
+                if *prime == 2 {
+                    break 'power_loop;
+                } else {
+                    break;
+                }
+            }
+
+            let mut first_hit = min;
+            if min % prime_power != 0 {
+                first_hit += prime_power - min % prime_power;
+            }
+
+            let range = max - first_hit;
+            let num: i64 = range / prime_power + 1;
+
+            if power == 1 {
+                ret.push((*prime, num));
+            } else {
+                ret[index].1 += num;
+            }
+        }
+    }
+
+    ret
+}
+
 pub fn factors_iter(prime_factors: &[(i64, u32)]) -> impl Iterator<Item = i64> {
     let mut powers = vec![0; prime_factors.len()];
     let mut done = false;
@@ -53,7 +89,7 @@ pub fn factors_iter(prime_factors: &[(i64, u32)]) -> impl Iterator<Item = i64> {
 #[cfg(test)]
 mod tests {
     use crate::util::prime;
-    use crate::util::prime::{factors_iter, prime_factorization};
+    use crate::util::prime::{factors_iter, prime_factorization, prime_factorization_of_product_of_range};
 
     #[test]
     fn test_prime_factorization() {
@@ -107,5 +143,19 @@ mod tests {
         let mut factors = factors_iter(prime_factors.as_slice()).collect::<Vec<i64>>();
         factors.sort();
         assert_eq!(factors, vec![1, 2, 3, 5, 6, 10, 15, 30]);
+    }
+
+    #[test]
+    fn test_prime_factorization_of_product_of_range() {
+        let primes = prime::seq::sieve_up_to(100_000).collect::<Vec<i64>>();
+
+        let prime_factors = prime_factorization_of_product_of_range(1, 5, primes.as_slice());
+        assert_eq!(prime_factors, vec![(2, 3), (3,1), (5,1)]);
+
+        let prime_factors = prime_factorization_of_product_of_range(1, 6, primes.as_slice());
+        assert_eq!(prime_factors, vec![(2, 4), (3,2), (5,1)]);
+
+        let prime_factors = prime_factorization_of_product_of_range(5, 10, primes.as_slice());
+        assert_eq!(prime_factors, vec![(2, 5), (3,3), (5,2), (7,1)]);
     }
 }
