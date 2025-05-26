@@ -42,6 +42,10 @@ pub fn prime_factorization_of_product_of_range(min: i64, max: i64, primes: &[i64
                 first_hit += prime_power - min % prime_power;
             }
 
+            if first_hit > max {
+                continue;
+            }
+
             let range = max - first_hit;
             let num: i64 = range / prime_power + 1;
 
@@ -157,5 +161,8 @@ mod tests {
 
         let prime_factors = prime_factorization_of_product_of_range(5, 10, primes.as_slice());
         assert_eq!(prime_factors, vec![(2, 5), (3,3), (5,2), (7,1)]);
+
+        let prime_factors = prime_factorization_of_product_of_range(8, 10, primes.as_slice());
+        assert_eq!(prime_factors, vec![(2, 4), (3,2), (5,1)]);
     }
 }
