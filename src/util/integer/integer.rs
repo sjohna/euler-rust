@@ -1,4 +1,4 @@
-use std::ops::{Div, Mul};
+use std::ops::{Add, Div, Mul};
 
 pub fn gcd(mut a: i64, mut b: i64) -> i64 {
     if b < a {
@@ -40,6 +40,16 @@ pub fn factorial<T: Mul<Output = T> + From<i64>>(n: i64) -> T {
 
 pub fn choose<T: Mul<Output = T> + Div<Output = T> + From<i64>>(n: i64, r: i64) -> T {
     factorial::<T>(n) / (factorial::<T>(r) * factorial::<T>(n-r))
+}
+
+pub fn digit_sum(mut n: i64) -> i64 {
+    let mut sum = 0;
+    while n > 0 {
+        sum = sum + n % 10;
+        n /= 10;
+    }
+
+    sum
 }
 
 #[cfg(test)]
@@ -99,5 +109,10 @@ mod tests {
         assert_eq!(super::pentagonal_number(8), 92);
         assert_eq!(super::pentagonal_number(9), 117);
         assert_eq!(super::pentagonal_number(10), 145);
+    }
+
+    #[test]
+    fn digit_sum() {
+        assert_eq!(super::digit_sum(1231), 7);
     }
 }
