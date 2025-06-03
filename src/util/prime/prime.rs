@@ -25,16 +25,11 @@ pub fn prime_factorization(mut n: i64, primes: &[i64]) -> Vec<(i64,u32)> {
 pub fn prime_factorization_of_product_of_range(min: i64, max: i64, primes: &[i64]) -> Vec<(i64,i64)> {
     let mut ret = Vec::<(i64,i64)>::new();
 
-    'power_loop:
-    for power in 1.. {
-        for (index, prime) in primes.into_iter().enumerate() {
+    for (index, prime) in primes.into_iter().enumerate() {
+        for power in 1.. {
             let prime_power = prime.pow(power);
             if prime_power > max {
-                if *prime == 2 {
-                    break 'power_loop;
-                } else {
-                    break;
-                }
+                break;
             }
 
             let mut first_hit = min;
@@ -52,7 +47,8 @@ pub fn prime_factorization_of_product_of_range(min: i64, max: i64, primes: &[i64
             if power == 1 {
                 ret.push((*prime, num));
             } else {
-                ret[index].1 += num;
+                let i = ret.len()-1;
+                ret[i].1 += num;
             }
         }
     }
@@ -164,5 +160,8 @@ mod tests {
 
         let prime_factors = prime_factorization_of_product_of_range(8, 10, primes.as_slice());
         assert_eq!(prime_factors, vec![(2, 4), (3,2), (5,1)]);
+
+        let prime_factors = prime_factorization_of_product_of_range(9, 9, primes.as_slice());
+        assert_eq!(prime_factors, vec![(3,2)]);
     }
 }
