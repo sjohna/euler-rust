@@ -100,6 +100,24 @@ pub fn pow_seq<T: Mul<Output = T> + Copy>(base: T, min: usize, max: usize) -> Ve
     ret
 }
 
+pub fn power_set<T: Clone>(items: &[T]) -> Vec<Vec<T>> {
+    let mut powerset = Vec::<Vec<T>>::new();
+    powerset.push(vec![]);
+
+    for item in items {
+        let mut new_powerset = powerset.clone();
+        for set in powerset.iter() {
+            let mut new_set = set.clone();
+            new_set.push(item.clone());
+            new_powerset.push(new_set);
+        }
+
+        powerset = new_powerset;
+    }
+
+    powerset
+}
+
 // pub trait SelectAt {
 //     type T;
 //     fn select_at(&self, indices: &[usize]) -> &[Self::T];
