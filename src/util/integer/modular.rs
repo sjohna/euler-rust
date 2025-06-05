@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 pub fn pow_cycle_lengths(modulus: i64) -> Vec<i64> {
     let mut ret = vec![0; modulus as usize];
 
@@ -15,6 +17,23 @@ pub fn pow_cycle_lengths(modulus: i64) -> Vec<i64> {
     }
 
     ret
+}
+
+pub fn pow_cycle(n: i64, modulus: i64) -> Vec<i64> {
+    let mut seen = HashSet::new();
+    let mut powers = Vec::new();
+
+    let mut power = 1;
+
+    while !seen.contains(&power) {
+        powers.push(power);
+        seen.insert(power);
+
+        power *= n;
+        power %= modulus;
+    }
+
+    powers
 }
 
 pub fn pow_mod(mut base: i64, mut exp: i64, modulus: i64) -> i64 {
