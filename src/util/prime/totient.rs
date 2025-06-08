@@ -48,7 +48,7 @@ mod tests {
 
     #[test]
     fn test_from_prime_factorization() {
-        let primes = prime::seq::sieve_up_to(5_000_000).collect::<Vec<_>>();
+        let primes = prime::sieve_up_to(5_000_000);
 
         assert_eq!(from_prime_factorization(1, &prime::prime_factorization(1, &primes)), 1);
         assert_eq!(from_prime_factorization(2, &prime::prime_factorization(2, &primes)), 1);
@@ -82,7 +82,7 @@ mod tests {
 
     #[test]
     fn test_sieve_up_to() {
-        let primes = prime::seq::sieve_up_to(5_000_000).collect::<Vec<_>>();
+        let primes = prime::sieve_up_to(5_000_000);
 
         assert_eq!(sieve_up_to(9, &primes), vec![0,1,1,2,2,4,2,6,4,6]);
 

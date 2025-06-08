@@ -2,7 +2,7 @@ use crate::util::prime;
 use crate::util::prime::totient;
 
 pub fn sieve(n: i64) -> i64 {
-    let primes = prime::seq::sieve_up_to(n).collect::<Vec<_>>();
+    let primes = prime::sieve_up_to(n);
 
     let totients = totient::sieve_up_to(n, &primes);
 

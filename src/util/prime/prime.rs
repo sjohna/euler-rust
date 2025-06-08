@@ -1,3 +1,5 @@
+use crate::util::prime;
+
 pub fn prime_factorization(mut n: i64, primes: &[i64]) -> Vec<(i64, u32)> {
     let mut m = Vec::<(i64,u32)>::new();
 
@@ -100,6 +102,10 @@ pub fn factors_iter(prime_factors: &[(i64, u32)]) -> impl Iterator<Item = i64> {
     })
 }
 
+pub fn sieve_up_to(n: i64) -> Vec<i64> {
+    prime::seq::sieve_up_to(n).collect()
+}
+
 #[cfg(test)]
 mod tests {
     use crate::util::prime;
@@ -107,7 +113,7 @@ mod tests {
 
     #[test]
     fn test_prime_factorization() {
-        let primes = prime::seq::sieve_up_to(100_000).collect::<Vec<i64>>();
+        let primes = prime::sieve_up_to(100_000);
 
         let prime_factors = prime_factorization(2, primes.as_slice());
         assert_eq!(prime_factors, vec![(2, 1)]);
@@ -130,7 +136,7 @@ mod tests {
 
     #[test]
     fn test_factors_iter() {
-        let primes = prime::seq::sieve_up_to(100_000).collect::<Vec<i64>>();
+        let primes = prime::sieve_up_to(100_000);
 
         let prime_factors = prime_factorization(2, primes.as_slice());
         let factors = factors_iter(prime_factors.as_slice()).collect::<Vec<i64>>();
@@ -161,7 +167,7 @@ mod tests {
 
     #[test]
     fn test_prime_factorization_of_product_of_range() {
-        let primes = prime::seq::sieve_up_to(100_000).collect::<Vec<i64>>();
+        let primes = prime::sieve_up_to(100_000);
 
         let prime_factors = prime_factorization_of_product_of_range(1, 5, primes.as_slice());
         assert_eq!(prime_factors, vec![(2, 3), (3,1), (5,1)]);

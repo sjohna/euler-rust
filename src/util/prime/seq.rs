@@ -1,12 +1,9 @@
 use super::is_prime;
 
 pub fn naive_trial_division() -> impl Iterator<Item = i64> {
-    std::iter::from_fn(naive_trial_division_fn())
-}
-
-pub fn naive_trial_division_fn() -> impl FnMut() -> Option<i64> {
     let mut next_candidate: i64 = 2;
-    move || -> Option<i64> {
+
+    std::iter::from_fn(move || -> Option<i64> {
         if next_candidate == 2 {
             next_candidate = 3;
             return Some(2)
@@ -21,20 +18,17 @@ pub fn naive_trial_division_fn() -> impl FnMut() -> Option<i64> {
 
             next_candidate += 2;
         }
-    }
+    })
 }
 
 pub fn sieve_up_to(n: i64) -> impl Iterator<Item = i64> {
-    std::iter::from_fn(sieve_up_to_fn(n))
-}
-
-pub fn sieve_up_to_fn(n: i64) -> impl FnMut() -> Option<i64> {
     let mut sieve = vec![false; (n+1).try_into().unwrap()];
     sieve[0] = true;
     sieve[1] = true;
 
     let mut start_index = 0;
-    move || -> Option<i64> {
+
+    std::iter::from_fn(move || -> Option<i64> {
         while start_index < sieve.len() {
             if !sieve[start_index] {
                 break;
@@ -55,7 +49,7 @@ pub fn sieve_up_to_fn(n: i64) -> impl FnMut() -> Option<i64> {
 
         start_index += 1;
         Some(next_prime.try_into().unwrap())
-    }
+    })
 }
 
 #[cfg(test)]
