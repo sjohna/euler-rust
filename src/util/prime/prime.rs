@@ -117,6 +117,20 @@ pub fn prime_factorization_of_product_of_range(min: i64, max: i64, primes: &[i64
     ret
 }
 
+pub fn smallest_prime_factor_up_to(n: i64, primes: Vec<i64>) -> Vec<i64> {
+    let mut ret = vec![0; n as usize + 1];
+
+    for p in primes {
+        for i in (p..=n).step_by(p as usize) {   // TODO: is it more efficient to write a basic for loop?
+            if ret[i as usize] == 0 {
+                ret[i as usize] = p;
+            }
+        }
+    }
+
+    ret
+}
+
 pub fn factors_iter(prime_factors: &[(i64, u32)]) -> impl Iterator<Item = i64> {
     let mut powers = vec![0; prime_factors.len()];
     let mut done = false;
