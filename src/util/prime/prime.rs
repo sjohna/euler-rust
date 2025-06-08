@@ -103,7 +103,7 @@ pub fn factors_iter(prime_factors: &[(i64, u32)]) -> impl Iterator<Item = i64> {
 #[cfg(test)]
 mod tests {
     use crate::util::prime;
-    use crate::util::prime::{factors_iter, prime_factorization, prime_factorization_of_product_of_range, totient_brute_force, totient_from_prime_factorization_using_sieve};
+    use crate::util::prime::{factors_iter, prime_factorization, prime_factorization_of_product_of_range};
 
     #[test]
     fn test_prime_factorization() {
