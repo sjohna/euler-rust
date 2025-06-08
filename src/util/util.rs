@@ -20,11 +20,11 @@ pub fn root_digit_sum(n: i32, digits: i32) -> i32 {
         let mut max = 9;
         while max - min > 0 {
             let next_digit = (max + min + 1) / 2;
-            let candidate = &root + next_digit; // why do I need a & on root here?
+            let candidate = &root + next_digit;
 
             let candidate_squared = &candidate * &candidate;
 
-            if candidate_squared > target {   // and here?
+            if candidate_squared > target {
                 max = next_digit-1;
             } else {
                 min = next_digit;
@@ -38,7 +38,7 @@ pub fn root_digit_sum(n: i32, digits: i32) -> i32 {
 }
 
 pub fn digit_sum(n: BigInt) -> i32 {
-    let str = n.to_string();   // why the second toString() here?
+    let str = n.to_string();
     let mut sum = 0;
     for digit in str.chars() {
         sum += digit as i32 - '0' as i32;
@@ -57,28 +57,14 @@ pub fn table<T: ToString + Copy,V: std::fmt::Display>(inputs: &[T], func: fn(T) 
 
     for i in 0..inputs.len() {
         print!("{:<max_length$} | ", input_strings[i]);
-        let (output, elapsed) = time(func, inputs[i]);
+        let (output, elapsed) = time(|| func(inputs[i]));
         print!("{} ({:?})\n", output, elapsed);
     }
 }
 
-pub fn time<T,V>(func: fn(T) -> V, input: T) -> (V, Duration) {
-    let start = SystemTime::now();
-    let output = func(input);
-    let elapsed = start.elapsed().unwrap();
-    (output, elapsed)
-}
-
-pub fn time0<V>(func: fn() -> V) -> (V, Duration) {
+pub fn time<F,V>(mut func: F) -> (V, Duration) where F: FnMut() -> V {
     let start = SystemTime::now();
     let output = func();
-    let elapsed = start.elapsed().unwrap();
-    (output, elapsed)
-}
-
-pub fn time2<T1, T2, V>(func: fn(T1,T2) -> V, input1: T1, input2: T2) -> (V, Duration) {
-    let start = SystemTime::now();
-    let output = func(input1, input2);
     let elapsed = start.elapsed().unwrap();
     (output, elapsed)
 }

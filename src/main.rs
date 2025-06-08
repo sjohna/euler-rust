@@ -5,5 +5,5 @@ mod util;
 mod problems;
 
 fn main() {
-    println!("{}",problems::euler67::solve_it())
+    println!("{:?}",util::time(|| 3 + 2))
 }
