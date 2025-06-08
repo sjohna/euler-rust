@@ -1,4 +1,5 @@
 use crate::util::integer;
+use crate::util::integer::IntegerExt;
 
 pub fn brute_force(n: i64) -> i64 {
     let mut count = 0;
@@ -14,9 +15,9 @@ pub fn brute_force(n: i64) -> i64 {
 pub fn from_prime_factorization(mut n: i64, prime_factorization: &[(i64, u32)]) -> i64 {
     let mut totient = n;
 
-    for (prime, mult) in prime_factorization {
+    for (prime, _) in prime_factorization {
         totient -= totient / *prime;
-        n /= prime.pow(*mult);
+        n = n.divide_out(*prime);
     }
 
     totient

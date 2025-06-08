@@ -25,7 +25,7 @@ pub fn prime_factorization(mut n: i64, primes: &[i64]) -> Vec<(i64, u32)> {
 pub fn prime_factorization_of_product_of_range(min: i64, max: i64, primes: &[i64]) -> Vec<(i64,i64)> {
     let mut ret = Vec::<(i64,i64)>::new();
 
-    for (index, prime) in primes.into_iter().enumerate() {
+    for prime in primes.into_iter() {
         for power in 1.. {
             let prime_power = prime.pow(power);
             if prime_power > max {

@@ -1,4 +1,4 @@
-use std::ops::{Add, Div, Mul};
+use std::ops::{Div, Mul};
 
 pub fn gcd(mut a: i64, mut b: i64) -> i64 {
     if b < a {
