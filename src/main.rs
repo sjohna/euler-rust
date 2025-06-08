@@ -5,5 +5,8 @@ mod util;
 mod problems;
 
 fn main() {
-    println!("{:?}",util::time(|| 3 + 2))
+    util::list(&[1,2,3,4,5,6,7,8,9,10], util::integer::factorial::<i64>);
+    println!();
+
+    util::table((1..=20).collect::<Vec<_>>().as_slice(), &(1..=20).collect::<Vec<_>>().as_slice(), util::integer::lcm)
 }

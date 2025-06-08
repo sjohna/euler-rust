@@ -47,7 +47,9 @@ pub fn digit_sum(n: BigInt) -> i32 {
     sum
 }
 
-pub fn table<T: ToString + Copy,V: std::fmt::Display>(inputs: &[T], func: fn(T) -> V) {
+// TODO: can I make this take any iterable thing?
+// TODO: function or closure
+pub fn list<T: ToString + Copy,V: std::fmt::Display>(inputs: &[T], func: fn(T) -> V) {
     let mut input_strings = Vec::new();
     for input in inputs {
         input_strings.push(input.to_string());
@@ -59,6 +61,60 @@ pub fn table<T: ToString + Copy,V: std::fmt::Display>(inputs: &[T], func: fn(T) 
         print!("{:<max_length$} | ", input_strings[i]);
         let (output, elapsed) = time(|| func(inputs[i]));
         print!("{} ({:?})\n", output, elapsed);
+    }
+}
+
+// TODO: function or closure
+pub fn table<T1: ToString + Copy, T2: ToString + Copy, V: ToString>(rows: &[T1], cols: &[T2], func: fn(T1, T2) -> V) {
+    let mut table = Vec::new();
+
+    let mut headers = Vec::new();
+    headers.push("".to_string());
+    for c in cols {
+        headers.push(c.to_string())
+    }
+
+    table.push(headers);
+
+    for r in rows {
+        let mut row = Vec::new();
+        row .push(r.to_string());
+        for c in cols {
+            row.push(func(*r, *c).to_string());
+        }
+
+        table.push(row);
+    }
+
+    let mut col_widths = vec![0; cols.len()+1];
+
+    for c_index in 0..cols.len()+1 {
+        for r_index in 0..rows.len()+1 {
+            if table[r_index][c_index].len() > col_widths[c_index] {
+                col_widths[c_index] = table[r_index][c_index].len();
+            }
+        }
+    }
+
+    for r_index in 0..rows.len()+1 {
+        for c_index in 0..cols.len()+1 {
+            if c_index > 0 {
+                print!("  ");
+            }
+            let width = col_widths[c_index];
+            print!("{:>width$}", table[r_index][c_index]);
+        }
+
+        println!();
+    }
+}
+
+pub fn time_of<F, V>(mut func: F) -> impl FnMut() -> (V, Duration) where F: FnMut() -> V {
+    move || {
+        let start = SystemTime::now();
+        let output = func();
+        let elapsed = start.elapsed().unwrap();
+        (output, elapsed)
     }
 }
 
