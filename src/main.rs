@@ -7,5 +7,5 @@ mod util;
 mod problems;
 
 fn main() {
-    println!("{:?}", problems::euler70::iter(10_000_000));
+    println!("{:?}", problems::euler84::simulate(4));
 }

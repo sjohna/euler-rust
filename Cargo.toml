@@ -6,3 +6,4 @@ edition = "2024"
 [dependencies]
 num-bigint = "0.4.6"
 priority-queue = "2.1.2"
+rand = "0.9.1"
