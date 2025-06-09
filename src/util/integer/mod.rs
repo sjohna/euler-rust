@@ -7,3 +7,4 @@ mod mod_int;
 pub use integer::*;
 pub use modular::*;
 pub use extension::*;
+pub use mod_int::*;

@@ -1,25 +1,37 @@
-use std::ops::{Add, AddAssign, Mul, MulAssign, Neg, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Mul, MulAssign, Neg, Rem, Sub, SubAssign};
 use crate::util::integer;
 
 #[derive(Copy, Clone, Hash, Debug, Eq, PartialEq)]
-struct ModInt {
+pub struct ModInt {
     value: i64,
     modulus: i64,
 }
 
 impl ModInt {
-    fn new(value: i64, modulus: i64) -> Self {
+    pub fn new(value: i64, modulus: i64) -> Self {
         ModInt {
             value: value % modulus,
             modulus,
         }
     }
 
-    fn pow(self, power: i64) -> Self {
+    pub fn pow(self, power: i64) -> Self {
         ModInt {
             value: integer::pow_mod(self.value, power, self.modulus),
             ..self
         }
+    }
+
+    pub fn value(self) -> i64 {
+        self.value
+    }
+
+    pub fn usize(self) -> usize {
+        self.value as usize
+    }
+
+    pub fn assign(&mut self, value: i64) {
+        self.value = value % self.modulus;
     }
 }
 
@@ -57,6 +69,17 @@ impl <T: Into<i64>> Mul<T> for ModInt {
     fn mul(self, other: T) -> Self {
         ModInt {
             value: (self.value * other.into()) % self.modulus,
+            ..self
+        }
+    }
+}
+
+impl <T: Into<i64>> Rem<T> for ModInt {
+    type Output = Self;
+
+    fn rem(self, other: T) -> Self {
+        ModInt {
+            value: self.value % other.into(),
             ..self
         }
     }
