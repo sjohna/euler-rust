@@ -51,14 +51,14 @@ pub fn simulate(die_size: i64) {
         curr_square += advance;
 
         // special squares
-        if curr_square.value() == 2 || curr_square.value() == 17 || curr_square.value() == 33 { // TODO: implement an actual equality operator...
+        if curr_square == 2 || curr_square == 17 || curr_square == 33 {
             // community chest
             let cc_card = cc_cards[rng.random_range(0..16)];
 
             if cc_card != -1 {
                 curr_square.assign(cc_card);
             }
-        } else if curr_square.value() == 7 || curr_square.value() == 22 || curr_square.value() == 36 {
+        } else if curr_square == 7 || curr_square == 22 || curr_square == 36 {
             // chance
             let ch_card = ch_cards[rng.random_range(0..16)];
 
@@ -69,13 +69,13 @@ pub fn simulate(die_size: i64) {
                     curr_square += 1;
                 }
             } else if ch_card == 200 {
-                while curr_square.value() != 12 && curr_square.value() != 28 {
+                while curr_square != 12 && curr_square != 28 {
                     curr_square += 1;
                 }
             } else if ch_card != -1 {
                 curr_square.assign(ch_card);
             }
-        } else if curr_square.value() == 30 {
+        } else if curr_square == 30 {
             curr_square.assign(10);
         }
     }
