@@ -1,7 +1,7 @@
-use std::ops::{Add, AddAssign, Mul, MulAssign, Neg, Rem, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Mul, MulAssign, Neg, Rem, RemAssign, Sub, SubAssign};
 use crate::util::integer;
 
-#[derive(Copy, Clone, Hash, Debug, Eq, PartialEq)]
+#[derive(Copy, Clone, Hash, Debug)]
 pub struct ModInt {
     value: i64,
     modulus: i64,
@@ -107,6 +107,12 @@ impl <T: Into<i64>> MulAssign<T> for ModInt {
     }
 }
 
+impl <T: Into<i64>> RemAssign<T> for ModInt {
+    fn rem_assign(&mut self, other: T) {
+        self.value %= other.into();
+    }
+}
+
 impl Neg for ModInt {
     type Output = Self;
 
@@ -118,15 +124,19 @@ impl Neg for ModInt {
     }
 }
 
-// TODO: figure out lifetimes so I can implement Eq, PartialEq
+impl PartialEq for ModInt {
+    fn eq(&self, other: &ModInt) -> bool {
+        self.value == other.value
+    }
+}
 
-// impl <T> PartialEq<T> for ModInt where &T: Into<i64> {
-//     fn eq(&self, other: &T) -> bool {
-//         self.value == <&T as Into<i64>>::into(other) % self.modulus
-//     }
-// }
-//
-// impl Eq for ModInt {}
+impl PartialEq<i64> for ModInt {
+    fn eq(&self, other: &i64) -> bool {
+        self.value == *other % self.modulus
+    }
+}
+
+impl Eq for ModInt {}
 
 #[cfg(test)]
 mod tests {
@@ -159,7 +169,10 @@ mod tests {
         a *= 9;
         assert_eq!(a.value, 6);
 
-        // assert_eq!(a, 6);
-        // assert_eq!(a, 16);
+        assert_eq!(a, 6);
+        assert_eq!(a, 16);
+
+        a %= 4;
+        assert_eq!(a.value, 2);
     }
 }
