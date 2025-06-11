@@ -1,11 +1,11 @@
 use std::ops::{Div, Mul};
 
 pub fn gcd(mut a: i64, mut b: i64) -> i64 {
-    while a != 0 {
-        (a,b) = (b%a,a);
+    while b != 0 {
+        (a,b) = (b,a%b)
     }
 
-    b
+    a
 }
 
 pub fn lcm(a: i64, b: i64) -> i64 {
