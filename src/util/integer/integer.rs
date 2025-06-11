@@ -1,10 +1,6 @@
 use std::ops::{Div, Mul};
 
 pub fn gcd(mut a: i64, mut b: i64) -> i64 {
-    if b < a {
-        (b,a) = (a,b);
-    }
-
     while a != 0 {
         (a,b) = (b%a,a);
     }
